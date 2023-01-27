@@ -9,6 +9,44 @@
     <link rel="icon" type="image/png" href="/imgs/library-bulding.png" />
   </head>
   <body>
+    <main class="container">
+      <header>
+        <h1>Books Library</h1>
+        <button class="add-book">Add Book</button>
+      </header>
+      <section class="books-container"></section>
+      <section class="books-form">
+        <form action="#" method="post">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required />
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" required />
+          <label for="pages">Pages</label>
+          <input
+            type="number"
+            name="pages"
+            id="pages"
+            step="5"
+            min="10"
+            max="2000"
+            required
+          />
+          <label for="status">Status</label>
+          <div class="book-form-status">
+            <input type="checkbox" name="status" id="status" required />
+            <span class="book-from-status-span">Not Read</span>
+          </div>
+          <button type="submit">Add</button>
+        </form>
+        <button class="close-button">X</button>
+      </section>
+      <footer>
+        <p>
+          Library App Copyrights &copy;
+          <a href="https://github.com/wissman77">Wissman77</a>
+        </p>
+      </footer>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
