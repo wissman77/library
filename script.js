@@ -31,9 +31,9 @@ addBookBtn.addEventListener('click', showForm);
 closeBtn.addEventListener('click', hideForm);
 statusUI.addEventListener('click', toggleCheck);
 addBookForm.addEventListener('submit', function (e) {
-  e.preventDefault();
   addBookToLibrary();
   hideForm();
+  e.preventDefault();
 });
 
 // Library
@@ -53,9 +53,9 @@ Book.prototype.read = function () {
 
 function addBookToLibrary() {
   const book = new Book(
-    titleUI.textContent,
-    authorUI.textContent,
-    pagesUI.textContent,
+    titleUI.value,
+    authorUI.value,
+    pagesUI.value,
     statusUI.checked
   );
   myLibrary.push(book);
