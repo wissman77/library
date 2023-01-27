@@ -176,6 +176,11 @@ header h1 {
   font-weight: 700;
 }
 
+.books-form input[type='checkbox'] {
+  transform: scale(2);
+  margin: 10px;
+}
+
 .books-container {
   min-height: 80vh;
   width: 100%;
