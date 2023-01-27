@@ -24,12 +24,9 @@ function hideForm() {
   addBookSection.style.display = 'none';
 }
 
+// Toggle the span text when the checkbox state change
 function toggleCheck() {
-  if (this.checked) {
-    statusSpan.textContent = 'Read';
-  } else {
-    statusSpan.textContent = 'Not Read';
-  }
+  statusSpan.textContent = this.checked ? 'Read' : 'Not Read';
 }
 
 function displayBooks() {
@@ -41,6 +38,8 @@ function displayBooks() {
   }
 }
 
+// Get a book object and its index in the array and build a UI component
+// for a book card
 function addBookToUI(book, index) {
   const div = document.createElement('div');
   div.classList.add('book');
@@ -54,10 +53,12 @@ function addBookToUI(book, index) {
   pages.textContent = `${book.pages} pages`;
   div.appendChild(pages);
   const isReadDiv = document.createElement('div');
+
   const isRead = document.createElement('input');
   isRead.setAttribute('type', 'checkbox');
   isRead.setAttribute('data-id', index);
   isRead.checked = book.isRead;
+  // Event Listener to change the UI status for read property
   isRead.addEventListener('click', function () {
     const spanToEdit = document.querySelector(`span[data-id="${index}"`);
     spanToEdit.textContent = this.checked ? 'Read' : 'Not Read';
@@ -65,15 +66,19 @@ function addBookToUI(book, index) {
     myBook.read();
   });
   isReadDiv.appendChild(isRead);
+
   const isReadSpan = document.createElement('span');
   isRead.setAttribute('data-id', index);
   isReadSpan.textContent = book.isRead ? 'Read' : 'Not Read';
   isReadSpan.setAttribute('data-id', index);
+
   isReadDiv.appendChild(isReadSpan);
   div.appendChild(isReadDiv);
+
   const removeBtn = document.createElement('button');
   removeBtn.textContent = 'Delete Book';
   removeBtn.classList.add('remove');
+  // add event listener to remove the book
   removeBtn.addEventListener('click', function () {
     delete myLibrary[index];
     displayBooks();
@@ -117,5 +122,4 @@ function addBookToLibrary() {
     statusUI.checked
   );
   myLibrary.push(book);
-  console.log(myLibrary);
 }
