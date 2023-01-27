@@ -95,6 +95,48 @@ header h1 {
   background-color: rgba(0, 0, 0, 0.3);
   display: none;
 }
+/* book element */
+.book {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  width: 250px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.book h2 {
+  color: var(--primary-bg-color);
+  text-align: center;
+  background-color: rgba(var(--form-color), 0.2);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.book span {
+  margin-left: 10px;
+}
+
+.remove {
+  background-color: rgb(247, 70, 70);
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+  font-weight: 700;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.remove:hover {
+  background-color: rgb(201, 21, 21);
+  transform: scale(1.02);
+}
 
 .books-form form {
   position: absolute;
@@ -186,8 +228,10 @@ header h1 {
   width: 100%;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  align-items: center;
+  justify-items: center;
   background-color: rgba(var(--form-color), 0.2);
 }
 
