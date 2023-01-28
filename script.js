@@ -1,3 +1,28 @@
+// Library
+const myLibrary = [];
+
+// Function constructor for Book
+function Book(title, author, pages, isRead) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.isRead = isRead;
+}
+
+Book.prototype.read = function () {
+  this.isRead = !this.isRead;
+};
+
+function addBookToLibrary() {
+  const book = new Book(
+    titleUI.value,
+    authorUI.value,
+    pagesUI.value,
+    statusUI.checked
+  );
+  myLibrary.push(book);
+}
+
 // UI variables
 const addBookBtn = document.querySelector('.add-book');
 const addBookSection = document.querySelector('.books-form');
@@ -29,13 +54,12 @@ function toggleCheck() {
   statusSpan.textContent = this.checked ? 'Read' : 'Not Read';
 }
 
+// iterate over books objects array and produce UI cards
 function displayBooks() {
-  if (myLibrary.length) {
-    booksContainer.innerHTML = '';
-    myLibrary.forEach((book, index) => {
-      booksContainer.appendChild(addBookToUI(book, index));
-    });
-  }
+  booksContainer.innerHTML = '';
+  myLibrary.forEach((book, index) => {
+    booksContainer.appendChild(addBookToUI(book, index));
+  });
 }
 
 // Get a book object and its index in the array and build a UI component
@@ -58,13 +82,6 @@ function addBookToUI(book, index) {
   isRead.setAttribute('type', 'checkbox');
   isRead.setAttribute('data-id', index);
   isRead.checked = book.isRead;
-  // Event Listener to change the UI status for read property
-  isRead.addEventListener('click', function () {
-    const spanToEdit = document.querySelector(`span[data-id="${index}"`);
-    spanToEdit.textContent = this.checked ? 'Read' : 'Not Read';
-    const myBook = myLibrary[index];
-    myBook.read();
-  });
   isReadDiv.appendChild(isRead);
 
   const isReadSpan = document.createElement('span');
@@ -78,14 +95,30 @@ function addBookToUI(book, index) {
   const removeBtn = document.createElement('button');
   removeBtn.textContent = 'Delete Book';
   removeBtn.classList.add('remove');
-  // add event listener to remove the book
-  removeBtn.addEventListener('click', function () {
-    delete myLibrary[index];
-    displayBooks();
-  });
+  removeBtn.setAttribute('data-id', index);
   div.appendChild(removeBtn);
 
   return div;
+}
+
+// deletes the book from myLibrary and the card from UI
+function deleteBook(e) {
+  if (e.target.className === 'remove') {
+    const index = +e.target.getAttribute('data-id');
+    myLibrary.splice(index, 1);
+    displayBooks();
+  }
+}
+
+// marks a book in myLibrary as read and Updated the UI
+function markBookAsRead(e) {
+  if (e.target.tagName === 'INPUT' && e.target.getAttribute('data-id')) {
+    const index = +e.target.getAttribute('data-id');
+    const spanToEdit = document.querySelector(`span[data-id="${index}"`);
+    spanToEdit.textContent = e.target.checked ? 'Read' : 'Not Read';
+    const myBook = myLibrary[index];
+    myBook.read();
+  }
 }
 
 // Event listeners
@@ -98,28 +131,5 @@ addBookForm.addEventListener('submit', function (e) {
   hideForm();
   e.preventDefault();
 });
-
-// Library
-const myLibrary = [];
-
-// Function constructor for Book
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
-
-Book.prototype.read = function () {
-  this.isRead = !this.isRead;
-};
-
-function addBookToLibrary() {
-  const book = new Book(
-    titleUI.value,
-    authorUI.value,
-    pagesUI.value,
-    statusUI.checked
-  );
-  myLibrary.push(book);
-}
+booksContainer.addEventListener('click', deleteBook);
+booksContainer.addEventListener('click', markBookAsRead);
