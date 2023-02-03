@@ -1,17 +1,31 @@
 // Library
 const myLibrary = [];
 
-// Function constructor for Book
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
+// // Function constructor for Book
+// function Book(title, author, pages, isRead) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.isRead = isRead;
+// }
 
-Book.prototype.read = function () {
-  this.isRead = !this.isRead;
-};
+// Book.prototype.read = function () {
+//   this.isRead = !this.isRead;
+// };
+
+// using new class feature
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
+
+  read() {
+    this.isRead = !this.isRead;
+  }
+}
 
 function addBookToLibrary() {
   const book = new Book(
