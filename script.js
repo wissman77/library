@@ -140,10 +140,45 @@ addBookBtn.addEventListener('click', showForm);
 closeBtn.addEventListener('click', hideForm);
 statusUI.addEventListener('click', toggleCheck);
 addBookForm.addEventListener('submit', function (e) {
+  e.preventDefault();
   addBookToLibrary();
   displayBooks();
   hideForm();
-  e.preventDefault();
 });
 booksContainer.addEventListener('click', deleteBook);
 booksContainer.addEventListener('click', markBookAsRead);
+
+// Form validity checks
+titleUI.addEventListener('invalid', () => {
+  if (titleUI.validity.valueMissing) {
+    titleUI.setCustomValidity('You must fill the Title field for the book');
+  } else {
+    titleUI.setCustomValidity('');
+  }
+});
+
+authorUI.addEventListener('invalid', () => {
+  if (authorUI.validity.valueMissing) {
+    authorUI.setCustomValidity('You must fill the Author field for the book');
+  } else {
+    authorUI.setCustomValidity('');
+  }
+});
+
+pagesUI.addEventListener('invalid', () => {
+  if (pagesUI.validity.valueMissing) {
+    pagesUI.setCustomValidity(
+      `Please enter number of pages between ${pagesUI.min}-${pagesUI.max}`
+    );
+  } else if (pagesUI.validity.rangeUnderflow) {
+    pagesUI.setCustomValidity(
+      `Please enter number of pages equal or more than ${pagesUI.min}`
+    );
+  } else if (pagesUI.validity.rangeOverflow) {
+    pagesUI.setCustomValidity(
+      `Please enter number of pages equal or less than ${pagesUI.max}`
+    );
+  } else {
+    pagesUI.setCustomValidity('');
+  }
+});
