@@ -5,6 +5,10 @@
   --secondary-bg-color: #86e5ff;
   --btns-color: #ffc93c;
   --form-color: 91, 192, 248;
+  --error-color: #f73b3b;
+  --error-bg-color: #fbb1b1;
+  --ok-color: #4ecd4c;
+  --ok-bg-color: #a1f2b5;
 }
 
 * {
@@ -224,6 +228,21 @@ header h1 {
   font-family: 'Philosopher', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
+}
+
+.form-control input:required {
+  border: 1px solid var(--error-color);
+  background: var(--error-bg-color);
+}
+
+.form-control input:valid {
+  border: 1px solid var(--ok-color);
+  background: var(--ok-bg-color);
+}
+
+.form-control input:out-of-range {
+  border: 1px solid gray;
+  background: #c2c2c2;
 }
 
 .form-control input:focus {
